@@ -1,0 +1,14 @@
+# dependencies
+node_modules/
+
+# pi package manager state
+.pi-lock.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# logs
+*.log

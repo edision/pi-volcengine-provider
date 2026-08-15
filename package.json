@@ -1,0 +1,11 @@
+{
+  "name": "pi-volcengine-provider",
+  "version": "0.1.0",
+  "description": "Volcengine ARK (Doubao) provider for pi — OpenAI-compatible Chat Completions",
+  "type": "module",
+  "main": "index.ts",
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}
