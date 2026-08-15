@@ -122,20 +122,22 @@ to `system` and `reasoning_effort` still passes through unchanged.
 
 ### Coding Plan (`volcengine-coding-plan`)
 
-Per the official [Coding Plan guide](https://www.volcengine.com/docs/82379/1928261):
+Per the official [Coding Plan guide](https://www.volcengine.com/docs/82379/1928261).
+Limits and modalities are taken from the official opencode `volcengine-plan`
+provider config (same ARK backend), not guessed.
 
-| Model id                | Reasoning | Vision | Context | Notes                                     |
-| ----------------------- | --------- | ------ | ------- | ----------------------------------------- |
-| `doubao-seed-2.1-turbo` | ✓         | ✓      | 256k    |                                           |
-| `doubao-seed-2.0-lite`  |           | ✓      | 256k    |                                           |
-| `minimax-m3`            | ✓         |        | 256k    |                                           |
-| `glm-5.2`               | ✓         |        | 200k    | `glm-latest` is an alias                  |
-| `glm-latest`            | ✓         |        | 200k    | alias for `glm-5.2`                       |
-| `glm-5.3`               | ✓         |        | 200k    |                                           |
-| `deepseek-v4-flash`     | ✓         |        | 200k    |                                           |
-| `deepseek-v4-pro`       | ✓         |        | 200k    |                                           |
-| `kimi-k2.7-code`        | ✓         |        | 256k    |                                           |
-| `ark-code-latest`       | ✓         |        | 256k    | switchable from the ARK console           |
+| Model id                | Reasoning | Vision | Context | Output | Notes                                     |
+| ----------------------- | --------- | ------ | ------- | ------ | ----------------------------------------- |
+| `doubao-seed-2.1-turbo` | ✓         | ✓      | 256k    | 64k    |                                           |
+| `doubao-seed-2.0-lite`  |           | ✓      | 256k    | 64k    |                                           |
+| `minimax-m3`            | ✓         | ✓      | 1M      | 64k    |                                           |
+| `glm-5.2`               | ✓         |        | 1M      | 64k    | `glm-latest` is an alias                  |
+| `glm-latest`            | ✓         |        | 1M      | 64k    | alias for `glm-5.2`                       |
+| `glm-5.3`               | ✓         |        | 1M      | 64k    |                                           |
+| `deepseek-v4-flash`     | ✓         |        | 1M      | 64k    |                                           |
+| `deepseek-v4-pro`       | ✓         |        | 1M      | 64k    |                                           |
+| `kimi-k2.7-code`        | ✓         | ✓      | 256k    | 32k    |                                           |
+| `ark-code-latest`       | ✓         | ✓      | 256k    | 32k    | switchable from the ARK console           |
 
 Anything that shows up at `GET {baseUrl}/models` but isn't in the tables above
 appears in `/model` with placeholder metadata (128k context, text-only,

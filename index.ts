@@ -140,67 +140,72 @@ const KNOWN_MODEL_METADATA: Record<string, ArkModelMeta> = {
 	// ---- Coding Plan tier (bare names per the official Coding Plan guide — note
 	//      these intentionally lack the version suffix and dot-separated version
 	//      segments used by the online-inference ids above).
-	//      See: https://www.volcengine.com/docs/82379/1928261
+	//      Limits and modalities are sourced from the official opencode
+	//      `volcengine-plan` provider config (which talks to the same ARK
+	//      backend), not guessed. See:
+	//        https://www.volcengine.com/docs/82379/1928261
 	"doubao-seed-2.1-turbo": {
 		reasoning: true,
 		input: ["text", "image"],
 		contextWindow: 256_000,
-		maxTokens: 32_000,
+		maxTokens: 65_536,
 	},
 	"doubao-seed-2.0-lite": {
 		reasoning: false,
 		input: ["text", "image"],
 		contextWindow: 256_000,
-		maxTokens: 32_000,
+		maxTokens: 65_536,
 	},
 	"minimax-m3": {
 		reasoning: true,
-		input: ["text"],
-		contextWindow: 256_000,
-		maxTokens: 32_000,
+		input: ["text", "image"],
+		contextWindow: 1_024_000,
+		maxTokens: 65_536,
 	},
 	"glm-5.2": {
 		reasoning: true,
 		input: ["text"],
-		contextWindow: 200_000,
-		maxTokens: 128_000,
+		contextWindow: 1_024_000,
+		maxTokens: 65_536,
 	},
 	"glm-latest": {
 		// documented alias for glm-5.2; kept separate so /model dedup keeps the
 		// name the activation page actually shows
 		reasoning: true,
 		input: ["text"],
-		contextWindow: 200_000,
-		maxTokens: 128_000,
+		contextWindow: 1_024_000,
+		maxTokens: 65_536,
 	},
 	"glm-5.3": {
 		reasoning: true,
 		input: ["text"],
-		contextWindow: 200_000,
-		maxTokens: 128_000,
+		contextWindow: 1_024_000,
+		maxTokens: 65_536,
 	},
 	"deepseek-v4-flash": {
+		// no `modalities` in the source config → text-only by default
 		reasoning: true,
 		input: ["text"],
-		contextWindow: 200_000,
-		maxTokens: 128_000,
+		contextWindow: 1_024_000,
+		maxTokens: 65_536,
 	},
 	"deepseek-v4-pro": {
+		// no `modalities` in the source config → text-only by default
 		reasoning: true,
 		input: ["text"],
-		contextWindow: 200_000,
-		maxTokens: 128_000,
+		contextWindow: 1_024_000,
+		maxTokens: 65_536,
 	},
 	"kimi-k2.7-code": {
 		reasoning: true,
-		input: ["text"],
+		input: ["text", "image"],
 		contextWindow: 256_000,
 		maxTokens: 32_000,
 	},
 	"ark-code-latest": {
 		// switchable alias; the real active model is set in the ARK console
 		reasoning: true,
-		input: ["text"],
+		input: ["text", "image"],
 		contextWindow: 256_000,
 		maxTokens: 32_000,
 	},
