@@ -137,14 +137,11 @@ const KNOWN_MODEL_METADATA: Record<string, ArkModelMeta> = {
 		maxTokens: 32_000,
 	},
 
-	// ---- Coding Plan tier (also reachable via /api/v3/models on the online endpoint) ----
-	"doubao-seed-2.0-code": {
-		reasoning: true,
-		input: ["text"],
-		contextWindow: 256_000,
-		maxTokens: 32_000,
-	},
-	"doubao-seed-2.0-pro": {
+	// ---- Coding Plan tier (bare names per the official Coding Plan guide — note
+	//      these intentionally lack the version suffix and dot-separated version
+	//      segments used by the online-inference ids above).
+	//      See: https://www.volcengine.com/docs/82379/1928261
+	"doubao-seed-2.1-turbo": {
 		reasoning: true,
 		input: ["text", "image"],
 		contextWindow: 256_000,
@@ -156,13 +153,52 @@ const KNOWN_MODEL_METADATA: Record<string, ArkModelMeta> = {
 		contextWindow: 256_000,
 		maxTokens: 32_000,
 	},
-	"doubao-seed-code": {
+	"minimax-m3": {
+		reasoning: true,
+		input: ["text"],
+		contextWindow: 256_000,
+		maxTokens: 32_000,
+	},
+	"glm-5.2": {
+		reasoning: true,
+		input: ["text"],
+		contextWindow: 200_000,
+		maxTokens: 128_000,
+	},
+	"glm-latest": {
+		// documented alias for glm-5.2; kept separate so /model dedup keeps the
+		// name the activation page actually shows
+		reasoning: true,
+		input: ["text"],
+		contextWindow: 200_000,
+		maxTokens: 128_000,
+	},
+	"glm-5.3": {
+		reasoning: true,
+		input: ["text"],
+		contextWindow: 200_000,
+		maxTokens: 128_000,
+	},
+	"deepseek-v4-flash": {
+		reasoning: true,
+		input: ["text"],
+		contextWindow: 200_000,
+		maxTokens: 128_000,
+	},
+	"deepseek-v4-pro": {
+		reasoning: true,
+		input: ["text"],
+		contextWindow: 200_000,
+		maxTokens: 128_000,
+	},
+	"kimi-k2.7-code": {
 		reasoning: true,
 		input: ["text"],
 		contextWindow: 256_000,
 		maxTokens: 32_000,
 	},
 	"ark-code-latest": {
+		// switchable alias; the real active model is set in the ARK console
 		reasoning: true,
 		input: ["text"],
 		contextWindow: 256_000,
@@ -205,11 +241,19 @@ const SEED_ONLINE_MODELS = [
 	"doubao-seed-evolving-latest-version",
 ];
 
+// Coding Plan tier uses bare names (no version suffix, no date code). The dot in
+// "doubao-seed-2.0-lite" is intentional — that is the official Coding Plan id,
+// not the online-inference "doubao-seed-2-0-lite-260215" with hyphens.
 const SEED_CODING_PLAN_MODELS = [
-	"doubao-seed-2.0-code",
-	"doubao-seed-2.0-pro",
+	"doubao-seed-2.1-turbo",
 	"doubao-seed-2.0-lite",
-	"doubao-seed-code",
+	"minimax-m3",
+	"glm-5.2",
+	"glm-latest",
+	"glm-5.3",
+	"deepseek-v4-flash",
+	"deepseek-v4-pro",
+	"kimi-k2.7-code",
 	"ark-code-latest",
 ];
 

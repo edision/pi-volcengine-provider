@@ -31,6 +31,13 @@ Both speak the OpenAI Chat Completions protocol; we delegate to pi's built-in
 `openai-completions` streaming implementation, so reasoning_effort, streaming,
 tool calls, and image input all work out of the box.
 
+> **Do NOT mix the two up.** The `volcengine-ark` (Online) provider hits
+> `/api/v3`, which ARK bills per-token and **does NOT consume your Coding Plan
+> quota**. Conversely, calling Coding Plan–eligible model names against
+> `/api/v3` will succeed but charge you out-of-pocket. If you have a Coding
+> Plan subscription, always pick `volcengine-coding-plan`.
+> See: <https://www.volcengine.com/docs/82379/1928261>.
+
 ## Setup
 
 1. Create an API key in the ARK console:
@@ -44,10 +51,16 @@ tool calls, and image input all work out of the box.
 
    Or set `ARK_API_KEY` in your environment and skip `/login`.
 
-3. Pick a model — full versioned IDs only (bare names like `doubao-pro` 404):
+3. Pick a model — naming convention differs by provider:
+
+   - **`volcengine-ark` (Online)** uses versioned hyphenated ids, e.g.
+     `doubao-seed-2-1-pro-260628`. Bare names like `doubao-pro` 404.
+   - **`volcengine-coding-plan`** uses bare names per the official Coding
+     Plan guide, e.g. `doubao-seed-2.1-turbo`, `glm-5.2`, `kimi-k2.7-code`.
 
    ```
    /model volcengine-ark/doubao-seed-2-1-pro-260628
+   /model volcengine-coding-plan/doubao-seed-2.1-turbo
    /model volcengine-coding-plan/ark-code-latest
    ```
 
@@ -109,11 +122,20 @@ to `system` and `reasoning_effort` still passes through unchanged.
 
 ### Coding Plan (`volcengine-coding-plan`)
 
-- `doubao-seed-2.0-code`
-- `doubao-seed-2.0-pro`
-- `doubao-seed-2.0-lite`
-- `doubao-seed-code`
-- `ark-code-latest` *(switchable from console — handy for trialing)*
+Per the official [Coding Plan guide](https://www.volcengine.com/docs/82379/1928261):
+
+| Model id                | Reasoning | Vision | Context | Notes                                     |
+| ----------------------- | --------- | ------ | ------- | ----------------------------------------- |
+| `doubao-seed-2.1-turbo` | ✓         | ✓      | 256k    |                                           |
+| `doubao-seed-2.0-lite`  |           | ✓      | 256k    |                                           |
+| `minimax-m3`            | ✓         |        | 256k    |                                           |
+| `glm-5.2`               | ✓         |        | 200k    | `glm-latest` is an alias                  |
+| `glm-latest`            | ✓         |        | 200k    | alias for `glm-5.2`                       |
+| `glm-5.3`               | ✓         |        | 200k    |                                           |
+| `deepseek-v4-flash`     | ✓         |        | 200k    |                                           |
+| `deepseek-v4-pro`       | ✓         |        | 200k    |                                           |
+| `kimi-k2.7-code`        | ✓         |        | 256k    |                                           |
+| `ark-code-latest`       | ✓         |        | 256k    | switchable from the ARK console           |
 
 Anything that shows up at `GET {baseUrl}/models` but isn't in the tables above
 appears in `/model` with placeholder metadata (128k context, text-only,
